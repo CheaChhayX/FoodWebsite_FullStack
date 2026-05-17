@@ -1,10 +1,18 @@
 import Link from "@mui/material/Link";
 import Logo from "../../assets/images/logo.png";
 import CountryDropdown from "../CountryDropdown";
-import { IoSearch } from "react-icons/io5";
+import React, { useContext, useEffect } from "react";
 import Button from "@mui/material/Button";
+import { FaRegCircleUser } from "react-icons/fa6";
+import { IoBagOutline } from "react-icons/io5";
+import SearchBox from "./SearchBox";
+import Navigation from "./Navigations"
+import { MyContext } from "../../App";
 
 const Header = () => {
+
+  const context = useContext(MyContext);
+
   return (
     <>
       <div className="headerWrapper">
@@ -27,20 +35,34 @@ const Header = () => {
               </div>
 
               <div className="col-sm-10 d-flex align-items-center part2">
-                <CountryDropdown/>
 
-                {/* Header Search Start Here */}
+                {context.countryList.length !==0 && <CountryDropdown />}
+                
+                <SearchBox />
 
-                  <div className="headerSearch">
-                    <input type="text"/>
-                    <Button><IoSearch/></Button>
+                <div className="part3 d-flex align-items-center ml-auto">
+                  <Button className="circle ml-3">
+                    <FaRegCircleUser />
+                  </Button>
+                  <div className="ml-auto cardTab d-flex align-items-center">
+                    <span className="price">$3.29</span>
+                    <div className="position-relative">
+                      <Button className="circle ml-2">
+                        <IoBagOutline />
+                      </Button>
+                      <span className="count d-flex align-items-center justify-content-center">
+                        1
+                      </span>
+                    </div>
                   </div>
-
-                {/* Header Search End Here */}
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <Navigation/>
+        
       </div>
     </>
   );
